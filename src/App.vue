@@ -8,7 +8,6 @@
 			:maxZoom="18"
 			:width="500"
 			:height="500"
-			:defaultCircleDraw="{ center: [30.048318, 103.831788], distance: 20 }"
 			drawType="circle"
 			:enableDraw="false"
 			:drawCircleEndCallback="drawCircleEndCallback"
@@ -29,6 +28,30 @@ export default {
 			console.log("经纬度坐标:", lonLatCenter);
 			console.log("半径:", radius);
 		},
+		handleDrawCircle(defaultCircleDraw) {
+			console.log("执行了 call-draw-circle");
+			this.$EventBus.$emit("call-draw-circle", defaultCircleDraw);
+		},
+	},
+	created() {
+		setTimeout(() => {
+			this.handleDrawCircle({
+				center: [30.058318, 103.831788],
+				distance: 2,
+			});
+		}, 1000);
+		setTimeout(() => {
+			this.handleDrawCircle( {
+				center: [30.098318, 103.831788],
+				distance: 30,
+			});
+		}, 3000);
+		// setInterval(() => {
+		// 	this.handleDrawCircle({
+		// 		center: [30.098318, 103.831788],
+		// 		distance: 30,
+		// 	});
+		// }, 500);
 	},
 };
 </script>
