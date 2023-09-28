@@ -1,7 +1,7 @@
 /*
  * @Author: gongxi33
  * @Date: 2023-09-24 14:19:31
- * @LastEditTime: 2023-09-28 14:41:16
+ * @LastEditTime: 2023-09-28 14:59:12
  * @LastEditors: gongxi33
  * @Description:
  * @FilePath: /vue2-openlayers-drag-draw/src/components/OLMap/OLMapDraw.js
@@ -23,8 +23,10 @@ export default {
 		drawCircleEndCallback,
 		enableDraw,
 		source,
+		isCreated,
 	) {
-		console.log('🚀 ~ file: OLMapDraw.js:28 ~ this.lastFeatures:', this.lastFeatures)
+		// isCreated means from new map component so we need remove previous feature
+		isCreated && (this.lastFeatures = null);
 		console.log(
 			"🚀 ~ file: OLMapDraw.js:27 ~ defaultCircleDraw:",
 			defaultCircleDraw,

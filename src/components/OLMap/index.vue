@@ -43,10 +43,12 @@ export default {
 			drawInteraction: null, // Store draw interaction
 			source: null, // vector source
 			lastListenDrawCircle: null, // record last draw circle object no need redundant
+			isCreated: false, // is new map component created
 		};
 	},
 	created() {
 		console.log("map created");
+		this.isCreated = true;
 		this.clearPreviousState();
 		this.source = new VectorSource();
 
@@ -65,6 +67,7 @@ export default {
 				"🚀 ~ file: index.vue:55 ~ created ~ this.lastListenDrawCircle:",
 				this.lastListenDrawCircle,
 			);
+
 			!OLMapUtils.deepEqual(
 				this.lastListenDrawCircle,
 				defaultCircleDraw,
@@ -75,8 +78,10 @@ export default {
 					this.drawCircleEndCallback,
 					this.enableDraw,
 					this.source,
+					this.isCreated,
 				),
-				(this.lastListenDrawCircle = defaultCircleDraw));
+				(this.lastListenDrawCircle = defaultCircleDraw),
+				(this.isCreated = false));
 		});
 	},
 	mounted() {
