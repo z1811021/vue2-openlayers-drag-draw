@@ -32,6 +32,10 @@ export default {
 			console.log("执行了 call-draw-circle");
 			this.$EventBus.$emit("call-draw-circle", defaultCircleDraw);
 		},
+		handleLocateCenter(centerObj) {
+			console.log("执行了 call-locate-center");
+			this.$EventBus.$emit("call-locate-center", centerObj);
+		},
 	},
 	created() {
 		setTimeout(() => {
@@ -41,11 +45,14 @@ export default {
 			});
 		}, 1000);
 		setTimeout(() => {
-			this.handleDrawCircle( {
+			this.handleDrawCircle({
 				center: [30.098318, 103.831788],
 				distance: 30,
 			});
 		}, 3000);
+		setTimeout(() => {
+			this.handleLocateCenter({ center: [31.098318, 103.831788], zoom: 13 });
+		}, 6000);
 		// setInterval(() => {
 		// 	this.handleDrawCircle({
 		// 		center: [30.098318, 103.831788],

@@ -1,7 +1,7 @@
 /*
  * @Author: gongxi33
  * @Date: 2023-09-24 14:23:32
- * @LastEditTime: 2023-09-28 11:34:44
+ * @LastEditTime: 2023-09-28 17:03:01
  * @LastEditors: gongxi33
  * @Description:
  * @FilePath: /vue2-openlayers-drag-draw/src/components/OLMap/OLMapUtils.js
@@ -34,6 +34,16 @@ export default {
 
 	toLonLat(coordinates) {
 		return toLonLat(coordinates);
+	},
+	locateCenter(map, centerObj) {
+		// create new View
+		var view = new View({
+			center: fromLonLat([centerObj.center[1], centerObj.center[0]]),
+			zoom: centerObj.zoom, // 缩放级别
+		});
+
+		// relocate new map view
+		map.setView(view);
 	},
 	deepEqual(obj1, obj2) {
 		if (obj1 === null || obj2 === null) return false;

@@ -51,7 +51,7 @@ export default {
 		this.isCreated = true;
 		this.clearPreviousState();
 		this.source = new VectorSource();
-
+		// listen draw circle event
 		this.$EventBus.$on("call-draw-circle", (defaultCircleDraw) => {
 			console.log(
 				"🚀 ~ file: index.vue:53 ~ created ~ defaultCircleDraw:",
@@ -82,6 +82,18 @@ export default {
 				),
 				(this.lastListenDrawCircle = defaultCircleDraw),
 				(this.isCreated = false));
+		});
+		// listen locate center event
+		this.$EventBus.$on("call-locate-center", ({ center, zoom = 13 }) => {
+			console.log(
+				"call-locate-center start now para is ",
+				"zoom",
+				zoom,
+				"center",
+				center,
+			);
+			const centerObj = {center, zoom}
+			OLMapUtils.locateCenter(this.map, centerObj)
 		});
 	},
 	mounted() {
