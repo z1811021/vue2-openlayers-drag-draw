@@ -1,7 +1,7 @@
 /*
  * @Author: gongxi33
  * @Date: 2023-09-24 14:19:31
- * @LastEditTime: 2023-09-28 14:59:12
+ * @LastEditTime: 2023-10-08 15:20:36
  * @LastEditors: gongxi33
  * @Description:
  * @FilePath: /vue2-openlayers-drag-draw/src/components/OLMap/OLMapDraw.js
@@ -62,7 +62,11 @@ export default {
 			enableDraw,
 		);
 
-		if (defaultCircleDraw.center && defaultCircleDraw.distance) {
+		if (
+			defaultCircleDraw &&
+			defaultCircleDraw.center &&
+			defaultCircleDraw.distance
+		) {
 			// Remove the old center point feature
 			this.lastFeatures &&
 				this.lastFeatures.forEach((feature) =>
@@ -163,7 +167,11 @@ export default {
 			source.addFeature(centerPointFeature);
 			// add callback give lonLatCenter and radius
 			if (typeof drawCircleEndCallback === "function") {
-				drawCircleEndCallback(lonLatCenter, radius);
+				// but we need pass [lat, lon] format
+				drawCircleEndCallback(
+					[lonLatCenter[1], lonLatCenter[0]],
+					radius,
+				);
 			}
 		});
 	},
@@ -214,5 +222,9 @@ export default {
 
 			console.log(coordinates);
 		});
+	},
+	// clear all source
+	clearMap(source) {
+		source.clear();
 	},
 };

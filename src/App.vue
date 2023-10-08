@@ -24,8 +24,8 @@ export default {
 		OLMap,
 	},
 	methods: {
-		drawCircleEndCallback(lonLatCenter, radius) {
-			console.log("经纬度坐标:", lonLatCenter);
+		drawCircleEndCallback(latLonCenter, radius) {
+			console.log("纬经度坐标:", latLonCenter);
 			console.log("半径:", radius);
 		},
 		handleDrawCircle(defaultCircleDraw) {
@@ -35,6 +35,12 @@ export default {
 		handleLocateCenter(centerObj) {
 			console.log("执行了 call-locate-center");
 			this.$EventBus.$emit("call-locate-center", centerObj);
+		},
+		handleEnableDrawCircle(isEnable) {
+			console.log("执行了 now you can draw circle");
+			this.$EventBus.$emit("call-enable-draw-circle", {
+				enable: isEnable,
+			});
 		},
 	},
 	created() {
@@ -51,8 +57,14 @@ export default {
 			});
 		}, 3000);
 		setTimeout(() => {
-			this.handleLocateCenter({ center: [31.098318, 103.831788], zoom: 13 });
+			this.handleLocateCenter({
+				center: [31.098318, 103.831788],
+				zoom: 13,
+			});
 		}, 6000);
+		setTimeout(() => {
+			this.handleEnableDrawCircle(true);
+		}, 12000);
 		// setInterval(() => {
 		// 	this.handleDrawCircle({
 		// 		center: [30.098318, 103.831788],

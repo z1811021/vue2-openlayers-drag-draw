@@ -92,8 +92,23 @@ export default {
 				"center",
 				center,
 			);
-			const centerObj = {center, zoom}
-			OLMapUtils.locateCenter(this.map, centerObj)
+			const centerObj = { center, zoom };
+			OLMapUtils.locateCenter(this.map, centerObj);
+		});
+		// listen enable draw circle
+		this.$EventBus.$on("call-enable-draw-circle", ({ enable }) => {
+			OLMapDraw.drawCircle(
+				this.map,
+				null,
+				this.drawCircleEndCallback,
+				enable,
+				this.source,
+				this.isCreated,
+			);
+		});
+		// listen clear all map data
+		this.$EventBus.$on("clear-map", () => {
+			OLMapDraw.clearMap(this.source);
 		});
 	},
 	mounted() {
